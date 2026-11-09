@@ -2,6 +2,8 @@
 
 A Java Swing drawing app for learning the Model Context Protocol (MCP). Draw with the mouse, then ask **Claude Desktop** to draw on the same canvas. Both inputs write to an observable blackboard.
 
+![MCP Paint Application Sreenshot](assets/screenshot.png)
+
 ## 1. Install and build
 
 Install a JDK (Java 17 or newer) and Apache Maven. Run `java -version` and `mvn -version` to check that Maven uses the JDK. Install Claude Desktop if you want to try the MCP tools.

@@ -2,7 +2,6 @@ import io.modelcontextprotocol.server.McpSyncServerExchange;
 import io.modelcontextprotocol.spec.McpSchema.CallToolRequest;
 import io.modelcontextprotocol.spec.McpSchema.CallToolResult;
 import io.modelcontextprotocol.spec.McpSchema.TextContent;
-import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
@@ -15,44 +14,33 @@ import java.util.Map;
 public class ToolsHandler {
 
   public CallToolResult handleGetPosition(McpSyncServerExchange exchange, CallToolRequest request) {
-    synchronized (Blackboard.getInstance()) {
-      return result("get_position()", position(), false);
-    }
+    return result("get_position()", Blackboard.getInstance().describePosition(), false);
   }
 
   public CallToolResult handleMove(McpSyncServerExchange exchange, CallToolRequest request) {
     Map<String, Object> arguments = request.arguments();
     String call = "move " + arguments;
-    synchronized (Blackboard.getInstance()) {
-      try {
-        return result(call, move(arguments), false);
-      } catch (IllegalArgumentException e) {
-        return result(call, e.getMessage(), true);
-      }
+    try {
+      return result(call, move(arguments), false);
+    } catch (IllegalArgumentException e) {
+      return result(call, e.getMessage(), true);
     }
   }
 
   public CallToolResult handleSetPen(McpSyncServerExchange exchange, CallToolRequest request) {
     Map<String, Object> arguments = request.arguments();
     String call = "set_pen " + arguments;
-    synchronized (Blackboard.getInstance()) {
-      try {
-        return result(call, setPen(arguments), false);
-      } catch (IllegalArgumentException e) {
-        return result(call, e.getMessage(), true);
-      }
+    try {
+      return result(call, setPen(arguments), false);
+    } catch (IllegalArgumentException e) {
+      return result(call, e.getMessage(), true);
     }
   }
 
   private String move(Map<String, Object> arguments) {
-    Point start = Blackboard.getInstance().getPosition();
-    long x = (long) start.x + offset(arguments.get("dx"));
-    long y = (long) start.y + offset(arguments.get("dy"));
-    if (x < 0 || x > Blackboard.MAX_X || y < 0 || y > Blackboard.MAX_Y) {
-      throw new IllegalArgumentException("Move would leave the canvas. " + position());
-    }
-    Blackboard.getInstance().moveTo((int) x, (int) y);
-    return position();
+    int dx = offset(arguments.get("dx"));
+    int dy = offset(arguments.get("dy"));
+    return Blackboard.getInstance().moveBy(dx, dy);
   }
 
   private int offset(Object value) {
@@ -71,15 +59,7 @@ public class ToolsHandler {
     if (!(down instanceof Boolean)) {
       throw new IllegalArgumentException("down must be true or false.");
     }
-    Blackboard.getInstance().setPen((Boolean) down);
-    return position();
-  }
-
-  private String position() {
-    Point point = Blackboard.getInstance().getPosition();
-    return "Position (" + point.x + ", " + point.y + "), pen "
-        + (Blackboard.getInstance().isPenDown() ? "down" : "up")
-        + ". Bounds: x 0–" + Blackboard.MAX_X + ", y 0–" + Blackboard.MAX_Y + ".";
+    return Blackboard.getInstance().setPen((Boolean) down);
   }
 
   private CallToolResult result(String call, String message, boolean isError) {

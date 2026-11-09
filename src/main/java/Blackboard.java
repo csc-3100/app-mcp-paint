@@ -55,9 +55,9 @@ final class Blackboard extends PropertyChangeSupport {
     firePropertyChange("drawing", null, new Point(position));
   }
 
-  public synchronized void setPen(boolean down) {
+  public synchronized String setPen(boolean down) {
     if (penDown == down) {
-      return;
+      return describePosition();
     }
     penDown = down;
     if (down) {
@@ -66,6 +66,23 @@ final class Blackboard extends PropertyChangeSupport {
       strokes.add(stroke);
     }
     firePropertyChange("drawing", null, new Point(position));
+    return describePosition();
+  }
+
+  public synchronized String moveBy(int dx, int dy) {
+    long x = (long) position.x + dx;
+    long y = (long) position.y + dy;
+    if (x < 0 || x > MAX_X || y < 0 || y > MAX_Y) {
+      throw new IllegalArgumentException("Move would leave the canvas. " + describePosition());
+    }
+    moveTo((int) x, (int) y);
+    return describePosition();
+  }
+
+  public synchronized String describePosition() {
+    return "Position (" + position.x + ", " + position.y + "), pen "
+        + (penDown ? "down" : "up")
+        + ". Bounds: x 0–" + MAX_X + ", y 0–" + MAX_Y + ".";
   }
 
   public void report(String message) {

@@ -76,7 +76,7 @@ Try asking Claude for a house with a triangular roof and two windows. The three 
 - `Blackboard` extends `PropertyChangeSupport` and stores the shared cursor, pen state, and strokes.
 - `DrawingPanel` observes the blackboard and repaints the canvas.
 
-![UML Class Diagram](assets/class-diagram.png)
+![UML Class Diagram](assets/class-diagram.svg)
 
 
 The MCP connection uses stdio. The demo needs no HTTP listener, or AWS service.

@@ -1,9 +1,7 @@
 import io.modelcontextprotocol.server.McpSyncServerExchange;
-import io.modelcontextprotocol.spec.McpSchema;
 import io.modelcontextprotocol.spec.McpSchema.CallToolRequest;
 import io.modelcontextprotocol.spec.McpSchema.CallToolResult;
-import io.modelcontextprotocol.spec.McpSchema.Tool;
-import io.modelcontextprotocol.spec.McpSchema.JsonSchema;
+import io.modelcontextprotocol.spec.McpSchema.TextContent;
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
@@ -15,12 +13,6 @@ import java.util.Map;
  * @version 1.0
  */
 public class ToolsHandler {
-
-  private MCPServer server;
-
-  public ToolsHandler(MCPServer server) {
-    this.server = server;
-  }
 
   public CallToolResult handleGetPosition(McpSyncServerExchange exchange, CallToolRequest request) {
     synchronized (Blackboard.getInstance()) {
@@ -90,9 +82,12 @@ public class ToolsHandler {
         + ". Bounds: x 0–" + Blackboard.MAX_X + ", y 0–" + Blackboard.MAX_Y + ".";
   }
 
-  private McpSchema.CallToolResult result(String call, String message, boolean isError) {
+  private CallToolResult result(String call, String message, boolean isError) {
     Blackboard.getInstance().report("MCP | " + call + " → " + message);
-    return server.result(message, isError);
+    return CallToolResult.builder()
+        .content(List.of(new TextContent(message)))
+        .isError(isError)
+        .build();
   }
 
 }

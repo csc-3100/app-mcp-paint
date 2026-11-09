@@ -3,7 +3,6 @@ import io.modelcontextprotocol.server.McpServer;
 import io.modelcontextprotocol.server.McpServer.SingleSessionSyncSpecification;
 import io.modelcontextprotocol.server.transport.StdioServerTransportProvider;
 import io.modelcontextprotocol.spec.McpSchema;
-import io.modelcontextprotocol.spec.McpSchema.CallToolResult;
 import io.modelcontextprotocol.spec.McpSchema.JsonSchema;
 import io.modelcontextprotocol.spec.McpSchema.Tool;
 import tools.jackson.databind.json.JsonMapper;
@@ -47,7 +46,7 @@ public class MCPServer {
         "set_pen",
         "Set down to true to draw when moving, or false to move without drawing.",
         Map.of("down", Map.of("type", "boolean")));
-    ToolsHandler handlers = new ToolsHandler(this);
+    ToolsHandler handlers = new ToolsHandler();
     session.toolCall(positionTool, handlers::handleGetPosition);
     session.toolCall(moveTool, handlers::handleMove);
     session.toolCall(penTool, handlers::handleSetPen);
@@ -56,14 +55,6 @@ public class MCPServer {
   private Tool createTool(String name, String description, Map<String, Object> properties) {
     JsonSchema schema = new JsonSchema("object", properties, List.copyOf(properties.keySet()), false, null, null);
     return Tool.builder().name(name).description(description).inputSchema(schema).build();
-  }
-
-  public CallToolResult result(String text, boolean isError) {
-    return CallToolResult
-        .builder()
-        .content(List.of(new McpSchema.TextContent(text)))
-        .isError(isError)
-        .build();
   }
 
 }

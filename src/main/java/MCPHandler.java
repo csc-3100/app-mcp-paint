@@ -16,13 +16,13 @@ import java.util.Map;
  * @author Javier Goonzalez-Sanchez (javiergs)
  * @version 1.0
  */
-public class MCPServer {
+public class MCPHandler {
 
   public void run() {
     JsonMapper jsonMapper = JsonMapper.builder().build();
     JacksonMcpJsonMapper jacksonMcpJsonMapper = new JacksonMcpJsonMapper(jsonMapper);
     StdioServerTransportProvider transport = new StdioServerTransportProvider(jacksonMcpJsonMapper);
-    McpServer.SingleSessionSyncSpecification session = McpServer.sync(transport);
+    SingleSessionSyncSpecification session = McpServer.sync(transport);
     session
         .serverInfo("MCP", "1.0.0")
         .capabilities(McpSchema.ServerCapabilities.builder().tools(true).build());

@@ -70,9 +70,9 @@ Try asking Claude for a house with a triangular roof and two windows. The three 
 ## Follow the code
 
 - `Main` creates the server and the Swing window.
-- `MCPServer` starts stdio and registers the tool definitions.
+- `MCPHandler` starts stdio and registers the tool definitions.
 - `ToolsHandler` translates MCP calls into blackboard operations.
-- `DrawingMouseListener` translates mouse events into blackboard operations.
+- `DrawingListener` translates mouse events into blackboard operations.
 - `Blackboard` extends `PropertyChangeSupport` and stores the shared cursor, pen state, and strokes.
 - `DrawingPanel` observes the blackboard and repaints the canvas.
 

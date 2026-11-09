@@ -1,11 +1,8 @@
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
-import javax.swing.JPanel;
 
 /**
  * Displays the drawing state and cursor position.
@@ -13,11 +10,14 @@ import javax.swing.JPanel;
  * @author Javier Goonzalez-Sanchez (javiergs)
  * @version 1.0
  */
-final class DrawingPanel extends JPanel implements PropertyChangeListener {
+public class DrawingPanel extends JPanel implements PropertyChangeListener {
 
   public DrawingPanel() {
     setBackground(new Color(0xFF8EB8F8, true));
-    setPreferredSize(new Dimension(Blackboard.MAX_X + 1, Blackboard.MAX_Y + 1));
+    DrawingListener mouse = new DrawingListener();
+    addMouseListener(mouse);
+    addMouseMotionListener(mouse);
+    Blackboard.getInstance().addPropertyChangeListener(this);
   }
 
   @Override
@@ -30,20 +30,17 @@ final class DrawingPanel extends JPanel implements PropertyChangeListener {
     super.paintComponent(graphics);
     // draw a grid
     graphics.setColor(new Color(0x6395FF));
-    for (int x = 0; x <= Blackboard.MAX_X; x += 10) {
+    for (int x = 0; x <= Blackboard.MAX_X; x += 10)
       graphics.drawLine(x, 0, x, Blackboard.MAX_Y);
-    }
-    for (int y = 0; y <= Blackboard.MAX_Y; y += 10) {
+    for (int y = 0; y <= Blackboard.MAX_Y; y += 10)
       graphics.drawLine(0, y, Blackboard.MAX_X, y);
-    }
     // draw the strokes and cursor
     graphics.setColor(Color.BLACK);
     for (List<Point> stroke : Blackboard.getInstance().getStrokes()) {
       Point previous = stroke.get(0);
       graphics.fillRect(previous.x, Blackboard.MAX_Y - previous.y, 1, 1);
       for (Point point : stroke) {
-        graphics.drawLine(previous.x, Blackboard.MAX_Y - previous.y,
-            point.x, Blackboard.MAX_Y - point.y);
+        graphics.drawLine(previous.x, Blackboard.MAX_Y - previous.y, point.x, Blackboard.MAX_Y - point.y);
         previous = point;
       }
     }

@@ -9,9 +9,9 @@ import java.awt.*;
  */
 public final class Main extends JFrame {
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     // server
-    MCPServer server = new MCPServer();
+    MCPHandler server = new MCPHandler();
     server.run();
     // view
     Main main = new Main();
@@ -25,14 +25,8 @@ public final class Main extends JFrame {
 
   Main() {
     DrawingPanel drawingPanel = new DrawingPanel();
-    DrawingMouseListener mouse = new DrawingMouseListener();
-    // view
     setLayout(new GridLayout(1, 1));
     add(drawingPanel);
-    // controller
-    drawingPanel.addMouseListener(mouse);
-    drawingPanel.addMouseMotionListener(mouse);
-    Blackboard.getInstance().addPropertyChangeListener(drawingPanel);
   }
 
 }

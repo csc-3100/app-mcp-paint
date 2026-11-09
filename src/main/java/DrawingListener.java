@@ -9,7 +9,7 @@ import java.awt.event.MouseMotionListener;
  * @author Javier Goonzalez-Sanchez (javiergs)
  * @version 1.0
  */
-final class DrawingMouseListener implements MouseListener, MouseMotionListener {
+public class DrawingListener implements MouseListener, MouseMotionListener {
 
   private boolean drawing;
 
@@ -47,12 +47,20 @@ final class DrawingMouseListener implements MouseListener, MouseMotionListener {
     Blackboard.getInstance().moveTo(x, Blackboard.MAX_Y - y);
   }
 
-  @Override public void mouseClicked(MouseEvent e) {}
+  @Override
+  public void mouseClicked(MouseEvent e) {
+  }
 
-  @Override public void mouseEntered(MouseEvent e) {}
+  @Override
+  public void mouseEntered(MouseEvent e) {
+  }
 
-  @Override public void mouseExited(MouseEvent e) {}
+  @Override
+  public void mouseExited(MouseEvent e) {
+  }
 
-  @Override public void mouseMoved(MouseEvent e) {}
+  @Override
+  public void mouseMoved(MouseEvent e) {
+  }
 
 }

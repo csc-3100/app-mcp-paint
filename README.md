@@ -4,8 +4,8 @@ A Java Swing drawing app for learning the Model Context Protocol (MCP). Draw wit
 
 ![MCP Paint Application Sreenshot](assets/screenshot.png)
 
-![NOTE]
->draw on MCP Paint a little cabin with mountains in the back, trees, a beautiful sunset, and some birds?
+> ![NOTE]
+> Claude draw in the MCP Paint App a little cabin with mountains in the back, trees, a beautiful sunset, and some birds.
 
 
 ## 1. Install and build

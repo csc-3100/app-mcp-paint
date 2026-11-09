@@ -1,6 +1,6 @@
 # MCP Paint
 
-A Java Swing drawing app for learning the Model Context Protocol (MCP). Draw with the mouse, then ask Claude Desktop to draw on the same canvas. Both inputs write to an observable blackboard.
+A Java Swing drawing app for learning the Model Context Protocol (MCP). Draw with the mouse, then ask **Claude Desktop** to draw on the same canvas. Both inputs write to an observable blackboard.
 
 ## 1. Install and build
 

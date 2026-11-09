@@ -6,7 +6,7 @@ A Java Swing drawing app for learning the Model Context Protocol (MCP). Draw wit
 
 Install a JDK (Java 17 or newer) and Apache Maven. Run `java -version` and `mvn -version` to check that Maven uses the JDK. Install Claude Desktop if you want to try the MCP tools.
 
-Clone the repository and build it:
+To run a published build, download the runnable JAR from [Releases](https://github.com/csc-5100/app-mcp-paint/releases) and run `java -jar mcp-paint-<version>.jar` using the downloaded filename. To build from source, clone the repository:
 
 ```sh
 git clone https://github.com/csc-5100/app-mcp-paint.git

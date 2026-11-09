@@ -1,0 +1,42 @@
+name: Feature or exercise request
+description: Propose a student-friendly example or learning exercise for MCP Paint
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "Describe a small improvement to drawing or to the classroom exercise."
+  - type: input
+    id: goal
+    attributes:
+      label: Learning goal
+      description: What should a student learn from this example?
+      placeholder: "e.g., compare mouse input with MCP tool calls"
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed change
+      description: Describe the expected behavior, input, and output.
+    validations:
+      required: true
+  - type: textarea
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Software or account requirements. Never share secrets.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: How could a student verify it works?
+      description: Provide observable success criteria and possible failure cases.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: Optional links, references, or limitations.

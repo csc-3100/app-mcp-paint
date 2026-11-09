@@ -71,6 +71,5 @@ Try asking Claude for a house with a triangular roof and two windows. The three 
 - `Blackboard` extends `PropertyChangeSupport` and stores the shared cursor, pen state, and strokes.
 - `DrawingPanel` observes the blackboard and repaints the canvas.
 
-The MCP connection uses stdio. The demo needs no MQTT broker, HTTP listener, or AWS service.
+The MCP connection uses stdio. The demo needs no HTTP listener, or AWS service.
 
-Originally developed in [csc-5100/mcp-server](https://github.com/csc-5100/mcp-server/tree/1a05914bda6fe212762ef02f63a0424f08f0326c/mcp-paint). Released under the [MIT License](LICENSE).

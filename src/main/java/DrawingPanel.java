@@ -13,6 +13,7 @@ import java.util.List;
 public class DrawingPanel extends JPanel implements PropertyChangeListener {
 
   public DrawingPanel() {
+    setPreferredSize(new Dimension(Blackboard.MAX_X + 1, Blackboard.MAX_Y + 1));
     setBackground(new Color(0xFF8EB8F8, true));
     DrawingListener mouse = new DrawingListener();
     addMouseListener(mouse);
@@ -50,3 +51,4 @@ public class DrawingPanel extends JPanel implements PropertyChangeListener {
   }
 
 }
+

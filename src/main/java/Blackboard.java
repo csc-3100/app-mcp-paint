@@ -12,7 +12,6 @@ import java.util.List;
 final class Blackboard extends PropertyChangeSupport {
 
   private static final Blackboard INSTANCE = new Blackboard();
-
   public static final int MAX_X = 599;
   public static final int MAX_Y = 399;
   private final List<List<Point>> strokes = new ArrayList<>();
@@ -26,15 +25,12 @@ final class Blackboard extends PropertyChangeSupport {
   public static Blackboard getInstance() {
     return INSTANCE;
   }
-
   public synchronized Point getPosition() {
     return new Point(position);
   }
-
   public synchronized boolean isPenDown() {
     return penDown;
   }
-
   public synchronized List<List<Point>> getStrokes() {
     List<List<Point>> snapshot = new ArrayList<>();
     for (List<Point> stroke : strokes) {
@@ -78,15 +74,14 @@ final class Blackboard extends PropertyChangeSupport {
     moveTo((int) x, (int) y);
     return describePosition();
   }
-
   public synchronized String describePosition() {
     return "Position (" + position.x + ", " + position.y + "), pen "
         + (penDown ? "down" : "up")
         + ". Bounds: x 0–" + MAX_X + ", y 0–" + MAX_Y + ".";
   }
-
   public void report(String message) {
     firePropertyChange("activity", null, message);
   }
 
 }
+

@@ -2,7 +2,7 @@ import io.modelcontextprotocol.json.jackson3.JacksonMcpJsonMapper;
 import io.modelcontextprotocol.server.McpServer;
 import io.modelcontextprotocol.server.McpServer.SingleSessionSyncSpecification;
 import io.modelcontextprotocol.server.transport.StdioServerTransportProvider;
-import io.modelcontextprotocol.spec.McpSchema;
+import io.modelcontextprotocol.spec.McpSchema.ServerCapabilities;
 import io.modelcontextprotocol.spec.McpSchema.JsonSchema;
 import io.modelcontextprotocol.spec.McpSchema.Tool;
 import tools.jackson.databind.json.JsonMapper;
@@ -25,7 +25,7 @@ public class MCPHandler {
     SingleSessionSyncSpecification session = McpServer.sync(transport);
     session
         .serverInfo("MCP", "1.0.0")
-        .capabilities(McpSchema.ServerCapabilities.builder().tools(true).build());
+        .capabilities(ServerCapabilities.builder().tools(true).build());
     registerTools(session);
     session.build();
   }

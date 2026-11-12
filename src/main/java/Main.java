@@ -10,15 +10,14 @@ import java.awt.*;
 public final class Main extends JFrame {
 
   public static void main(String[] args) {
-    // server
     MCPHandler server = new MCPHandler();
     server.run();
-    // view
+
     Main main = new Main();
     main.setTitle("MCP Paint");
     main.setResizable(false);
-    main.setLocationByPlatform(true);
     main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    main.setLocationRelativeTo(null);
     main.pack();
     main.setVisible(true);
   }
@@ -30,3 +29,4 @@ public final class Main extends JFrame {
   }
 
 }
+

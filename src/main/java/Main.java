@@ -17,8 +17,8 @@ public final class Main extends JFrame {
     main.setTitle("MCP Paint");
     main.setResizable(false);
     main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    main.setLocationRelativeTo(null);
     main.pack();
+    main.setLocationRelativeTo(null);
     main.setVisible(true);
   }
 
